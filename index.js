@@ -62,8 +62,8 @@ app.use(cookieParser());
 
 // crear la session
 app.use(session({
-    secret: process.env.SECRETO,
-    key: process.env.KEY,
+    secret: 'palabrasecreta',
+    key: 'supersecreta',
     resave : false,
     saveUninitialized : false
 }))
