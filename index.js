@@ -7,6 +7,7 @@ const session= require('express-session');
 const cookieParser= require('cookie-parser');
 const passport = require('./config/passport');
 
+
 //Configuracion y modelos de DB
 const db= require('./config/db');
 require('./models/operador');
@@ -20,17 +21,27 @@ require('dotenv').config({path: 'variables.env'});
 //Aplicacion principal
 const app = express();
 
-//Enable CORS
-app.use(function(req,res,next){
-res.header("Access-Control-Allow-Origin","*");
-res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
-next();
 
-})
 
-//Body Parser, leer formulario
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+
+const publicPath = path.resolve(__dirname, './public');
+app.set('views', path.join(__dirname, './public'));
+app.set('views', path.join(__dirname, './public/views'));
+app.set('view engine', 'ejs');
+const port = process.env.PORT || 3000;
+
+
+// app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.json({ limit: '50mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true })); // support encoded bodies
+
+
+// Enable CORS
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 
 
@@ -40,7 +51,7 @@ app.use(expressLayout);
 app.set('view engine','ejs');
 
 //Archivos staticos
-app.use(express.static('public'));
+app.use(express.static(publicPath));
 
 // Ubicaciones - Vistas
 app.set('views',path.join(__dirname,'./views'));
@@ -78,10 +89,10 @@ app.use((req,res,next)=>{
 });
 
 //Routing
-app.use('/',router());
+app.use('/',express.router() );
 
 
-const port = process.env.PORT || 3000;
+
 //Agrega el puerto
 app.listen(port,()=>{
     console.log('el servidor esta funcionando');
