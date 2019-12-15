@@ -89,7 +89,7 @@ app.use((req,res,next)=>{
 });
 
 //Routing
-app.use('/',express.router() );
+app.use('/',router() );
 
 
 
