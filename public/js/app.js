@@ -30,7 +30,7 @@ function agregarMarcador(lat,lng,des){
 
 // Obtener mensajes del servidor
 
-fetch('https://proysig.herokuapp.com/getSolicitud',{ 
+await fetch('https://proysig.herokuapp.com/getSolicitud',{ 
     method: 'GET'
   })
   .then(function(response) {
