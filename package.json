@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "desarrollo": "concurrently \"npm run dev \" \"npm run watch \"   ",
+    "desarrollo": "node ./index.js   ",
     "dev": "nodemon ./index.js",
-    "start": "node ./index.js",
+    "start": "concurrently \"npm run dev \" \"npm run watch \" ",
     "watch": "webpack --w --mode development"
   },
   "keywords": [
