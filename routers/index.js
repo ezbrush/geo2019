@@ -22,8 +22,12 @@ module.exports= function(){
 
     router.get('/crearSolicitud',solicitudController.formCrearSolicitud);
     router.post('/crearSolicitud',solicitudController.crearSolicitud);
+    router.post('/enviarSolicitud/',solicitudController.crearNuevaSolicitud);
 
     router.post('/register',registerController.registerUser);
     router.get('/home',homeController.home );
+    router.get('/getProfile',authController.getUser );
+    router.get('/getSolicitud',solicitudController.getListaSolicitud );
+
     return router;
 }

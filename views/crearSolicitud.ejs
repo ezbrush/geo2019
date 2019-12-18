@@ -297,6 +297,18 @@
             <!-- form start -->
             <form action="/crearSolicitud" method="POST">
               <div class="box-body">
+                
+                  <!-- Date -->
+                <div class="form-group">
+                  <label>Date:</label>
+                  <div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" id="datepicker" name="fecha">
+                  </div>
+                  <!-- /.input group -->
+                </div>
                 <div class="form-group">
                   <label for="example">UsuarioId: </label>
                   <select name="usuarioId" class="form-control" >
@@ -307,24 +319,23 @@
                     <% }) %>
                     </select>
                 </div>
-                  <!-- Date -->
                 <div class="form-group">
-                  <label>Date:</label>
-
-                  <div class="input-group date">
-                    <div class="input-group-addon">
-                      <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control pull-right" id="datepicker" name="fecha">
-                  </div>
-                  <!-- /.input group -->
-                </div>
+                <label for="exampleInputEmail1"></label>
+                </div >
+                <div class="form-group">
+                  <label for="exampleInputEmail1"></label>
+                  </div >
+                  <div class="form-group">
+                    <label for="exampleInputEmail1"></label>
+                    </div >
                 <!-- /.form group -->
                 <div class="form-group">
                   <label for="exampleInputEmail1">Ubicacion</label>
                   <input type="text" class="form-control" id="formbuscador" placeholder="Ingesar Ubicacion" name="Telefono">
                 </div>
               </div>
+              
+              
               <div class="campo mapa">
               <div id="mapa"></div>
             </div>

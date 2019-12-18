@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "desarrollo": "concurrently \"npm run dev \" \"npm run watch \"  ",
+    "desarrollo": "concurrently \"npm run dev \" \"npm run watch \"   ",
     "dev": "nodemon ./index.js",
-    "start": "node ./index.js ",
+    "start": "node ./index.js",
     "watch": "webpack --w --mode development"
   },
   "keywords": [
@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.19.0",
     "concurrently": "^5.0.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",

@@ -257,23 +257,28 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Telefono</th>
-                    <th>Nombre</th>
-                    <th>Fecha</th>
-                    <th>Email</th>
-                    <th>Tipo</th>
+                    <th>Usuario</th>
+                    <th>Descripcion</th>
                     <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>latitud</th>
+                    <th>longitud</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>4825550100</td>
-                    <td>Orellana Tommy</td>
-                    <td>1995/01/2018</td>
-                    <td> xxx@gmail.com</td>
-                    <td>Bombero</td>
-                    <td>Activo</td>
-                  </tr>
+                 
+                    <% list_sol.forEach(sol =>{ %>
+                      <tr>
+                      <td> <%= sol.usuarioId  %></td>
+                      <td> <%= sol.descripcion  %></td>
+                      <td> <%= sol.estado  %></td>
+                      <td> <%= sol.fecha  %></td>
+                      <td> <%= sol.ubicacion.coordinates[0]  %></td>
+                      <td> <%= sol.ubicacion.coordinates[1]  %></td>
+                    </tr>
+                    <% }) %>
+                    
+              
                   
                   </tbody>
                   <tfoot>
@@ -290,9 +295,12 @@
               </div>
             
             </div>
+            <input type="hidden" id="objeto" value="<% list_sol %>"</input>
             <div class="campo mapa">
               <div id="mapa"></div>
             </div>
+
+                
             
             <!-- /.box-body -->
           </div>
@@ -438,4 +446,5 @@
 </script>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 <script src="dist/bundle.js"></script>
+
 </body>

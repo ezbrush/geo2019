@@ -25,3 +25,17 @@ exports.cerrarSesion = (req, res, next) => {
     res.redirect('/');
     next();
 }
+
+exports.getUser = (req, res, next) =>{
+
+    //here it is
+    var user = req.user;
+
+    //you probably also want to pass this to your view
+    res.json({
+        ok: true,
+        body : user,
+        
+      });
+          
+}

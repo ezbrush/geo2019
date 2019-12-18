@@ -12,15 +12,17 @@ const solicitud = db.define('solicitud',{
     fecha : {
         type : Sequelize.DATEONLY, 
         allowNull : false,
-        validate : {
-            notEmpty : {
-                msg : 'Agrega una fecha'
-            }
-        }
+        
     },
     ubicacion : {
         type : Sequelize.GEOMETRY('POINT') 
     },
+    estado: {
+        type: Sequelize.STRING(60)
+    },
+    descripcion:{
+        type:  Sequelize.STRING(60)
+    }
    
 
 },{
