@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 });
-function agregarMarcador(lat,lng,des){
+async function agregarMarcador(lat,lng,des){
       // agregar el pin
       mk= new L.marker([lat,lng],{
         draggable : true,
@@ -30,7 +30,7 @@ function agregarMarcador(lat,lng,des){
 
 // Obtener mensajes del servidor
 
-await fetch('https://proysig.herokuapp.com/getSolicitud',{ 
+fetch('https://proysig.herokuapp.com/getSolicitud',{ 
     method: 'GET'
   })
   .then(function(response) {
@@ -39,7 +39,7 @@ await fetch('https://proysig.herokuapp.com/getSolicitud',{
   .then(function(myJson) {
    //   alert(JSON.stringify(myJson));
     myJson.forEach( item => 
-       agregarMarcador(item.ubicacion.coordinates[0], item.ubicacion.coordinates[1], item.descripcion ));
+      await agregarMarcador(item.ubicacion.coordinates[0], item.ubicacion.coordinates[1], item.descripcion ));
   });
 
 // L.marker([-17.796067, -63.183873]).addTo(map).bindPopup('estadio');
