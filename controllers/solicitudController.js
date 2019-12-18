@@ -1,17 +1,22 @@
+
 const Usuario = require('../models/usuario');
-exports.formCrearUsuario = (req,res)=>{
-    res.render('crearUsuario');
+const Solicitud = require('../models/solicitud');
+exports.formCrearSolicitud = async (req,res)=>{
+    const lista_usu= await Usuario.findAll();
+    res.render('crearSolicitud',{
+        lista_usu
+    });
 }
 
-exports.crearUser= async(req,res)=>{
-    console.log('registrando usuario...');
+exports.crearSolicitud= async(req,res)=>{
+    console.log('registrando solicitud...');
         const user = req.body;
         console.log(user);
         try {
-            const nuevooperador= await Usuario.create(user);
+            const nuevooperador= await Solicitud.create(user);
             //TODO ::  FLASH MESSAGE Y REDIRECCIONAR
             console.log('Nuevo Usuario', nuevooperador);     
-            req.flash('exito', 'Se acaba de registrar el usuario');
+            req.flash('exito', 'Se acaba de registrar la solicitud');
             res.redirect('/home'); 
         } catch (error) {
             
@@ -20,7 +25,7 @@ exports.crearUser= async(req,res)=>{
            // console.log(erroresSequelize); 
     
             req.flash('error', erroresSequelize);
-            res.redirect('/crearUsuario');
+            res.redirect('/crearSolicitud');
         }
       
 }

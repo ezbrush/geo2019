@@ -5,6 +5,8 @@ const usuarioController= require('../controllers/usuarioController');
 const registerController= require('../controllers/registerController');
 const loginController= require('../controllers/loginController');
 const authController= require('../controllers/authController');
+const solicitudController= require('../controllers/solicitudController');
+
 
 
 module.exports= function(){
@@ -15,7 +17,13 @@ module.exports= function(){
     router.post('/register',registerController.registerUser);
 
 
-    router.get('/crear-cuenta',usuarioController.formCrearCuenta);
+    router.get('/crearUsuario',usuarioController.formCrearUsuario);
+    router.post('/crearUsuario',usuarioController.crearUser);
+
+    router.get('/crearSolicitud',solicitudController.formCrearSolicitud);
+    router.post('/crearSolicitud',solicitudController.crearSolicitud);
+
+    router.post('/register',registerController.registerUser);
     router.get('/home',homeController.home );
     return router;
 }
