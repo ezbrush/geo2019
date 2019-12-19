@@ -4,7 +4,7 @@ const db= require('../config/db');
 const personal = require('../models/personal');
 
 
-const ubica = db.define('solicitud',{
+const ubica = db.define('ubicacionPersonal',{
     id:{
         type: Sequelize.INTEGER,
         primaryKey:true,

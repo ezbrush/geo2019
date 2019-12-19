@@ -24,6 +24,7 @@ const personal=db.define('personal',{
         }
 
     },
+    telefono: Sequelize.INTEGER,
     password:{
         type: Sequelize.STRING(60),
         allowNull:false,

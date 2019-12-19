@@ -14,6 +14,8 @@ require('./models/operador');
 require('./models/usuario');
 require('./models/solicitud');
 require('./models/especialidad');
+require('./models/personal');
+require('./models/ubicaPerso');
 
 db.sync().then( ()=> console.log('DB Conectada')).catch((error)=>console.log(error));
 
