@@ -1,6 +1,7 @@
 import {OpenStreetMapProvider} from 'leaflet-geosearch';
 
 const map = L.map('mapa').setView([-17.7862892, -63.1811714], 13);
+//const map = L.map('mapa');
 let marker;
 let mk;
 
@@ -13,8 +14,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
      // Buscador de direccion
-     const buscador = document.querySelector('#formbuscador');
-     buscador.addEventListener('input', buscarDireccion);
+     //const buscador = document.querySelector('#formbuscador');
+    // buscador.addEventListener('input', buscarDireccion);
     
 
 
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 // Obtener mensajes del servidor
 
-await fetch('https://proysig.herokuapp.com/getSolicitud',{ 
+ fetch('https://proysig.herokuapp.com/getSolicitud',{ 
     method: 'GET'
   })
   .then(function(response) {

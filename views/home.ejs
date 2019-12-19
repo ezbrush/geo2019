@@ -431,6 +431,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- page script -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+<script src="dist/bundle.js"></script>
 <script>
   $(function () {
     $('#example1').DataTable()
@@ -442,9 +444,22 @@
       'info'        : true,
       'autoWidth'   : false
     })
+
+    var table = $('#example1').DataTable();
+    table.rows().eq(0).each( function ( index ) {
+    var row = table.row( index );
+ 
+    var data = row.data();
+    console.log(data);
+    
+   //var m= L.map("mapa").setView([-17.7862892, -63.1811714], 13);
+    // ... do something with data(), or row.node(), etc
+} );
+
+
   })
 </script>
-<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-<script src="dist/bundle.js"></script>
+
+
 
 </body>
