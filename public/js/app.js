@@ -23,6 +23,56 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 
+fetch('https://proysig.herokuapp.com/getUbicacionPersonal',{ 
+    method: 'GET'
+  })
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+   //   alert(JSON.stringify(myJson));
+    myJson.forEach( item => {
+        var greenIcon;
+        if(item.descripcion == "ambulancia"){
+            greenIcon = new L.Icon({
+                iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              });
+        }
+        if(item.descripcion == "policia"){
+            greenIcon = new L.Icon({
+                iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              });
+        }
+        if(item.descripcion == "bombero"){
+            greenIcon = new L.Icon({
+                iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              });
+        }
+         
+          
+        mk= new L.marker([item.ubicacion.coordinates[0],item.ubicacion.coordinates[1]],{
+            icon: greenIcon,
+            draggable : true,
+            autoPan : true,
+        }).addTo(map).bindPopup(item.idpersonal);
+    });
+  });
+
 // Obtener mensajes del servidor
 
  fetch('https://proysig.herokuapp.com/getSolicitud',{ 
@@ -34,10 +84,44 @@ document.addEventListener('DOMContentLoaded',()=>{
   .then(function(myJson) {
    //   alert(JSON.stringify(myJson));
     myJson.forEach( item => {
+        var greenIcon;
+        if(item.descripcion == "ambulancia"){
+            greenIcon = new L.Icon({
+                iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              });
+        }
+        if(item.descripcion == "policia"){
+            greenIcon = new L.Icon({
+                iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              });
+        }
+        if(item.descripcion == "bombero"){
+            greenIcon = new L.Icon({
+                iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              });
+        }
+         
+          
         mk= new L.marker([item.ubicacion.coordinates[0],item.ubicacion.coordinates[1]],{
+            icon: greenIcon,
             draggable : true,
             autoPan : true,
-        }).addTo(map).bindPopup(item.descripcion);
+        }).addTo(map).bindPopup("Emergemcia "+item.descripcion);
     });
   });
 

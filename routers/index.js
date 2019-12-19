@@ -36,6 +36,8 @@ module.exports= function(){
     router.get('/crearPersonal',personalController.home );
     router.post('/crearPersonal',personalController.nuevoPersonal );
     router.get('/crearUbicacionPersonal',ubicacionPersonalController.home );
+    router.post('/enviarUbicacionPersonal',ubicacionPersonalController.crearNuevaUbicacion );
+    router.get('/getUbicacionPersonal',ubicacionPersonalController.getListaSolicitud );
 
     return router;
 }
