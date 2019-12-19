@@ -7,6 +7,16 @@ exports.home =async (req,res)=>{
 
 }
 
+exports.getListaPersonal= async (req,res)=>{
+    const lista_soli= await Personal.findAll();
+    try {
+        res.json(lista_soli)
+    } catch (error) {
+        res.json(error)
+    }
+
+}
+
 exports.nuevoPersonal=  async(req,res)=>{
     console.log('registrando Personal...');
         const user = req.body;

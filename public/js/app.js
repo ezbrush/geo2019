@@ -121,7 +121,7 @@ fetch('https://proysig.herokuapp.com/getUbicacionPersonal',{
             icon: greenIcon,
             draggable : true,
             autoPan : true,
-        }).addTo(map).bindPopup("Emergemcia "+item.descripcion);
+        }).addTo(map).bindPopup("Emergencia "+item.descripcion);
     });
   });
 

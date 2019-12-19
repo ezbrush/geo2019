@@ -14,6 +14,7 @@ const ubicacionPersonalController= require('../controllers/ubicaPersoController'
 
 module.exports= function(){
     router.get('/',loginController.login);  
+    router.post('/loginUser',loginController.loginUser);  
     router.post('/',authController.autenticarUsuario);  
 
     router.get('/register',registerController.register);
@@ -23,7 +24,7 @@ module.exports= function(){
     router.get('/crearUsuario',usuarioController.formCrearUsuario);
     router.post('/crearUsuario',usuarioController.crearUser);
 
-    router.get('/crearSolicitud',solicitudController.formCrearSolicitud);
+    router.get('/crearSolicitud/:usuarioId/:id',solicitudController.formCrearSolicitud);
     router.post('/crearSolicitud',solicitudController.crearSolicitud);
     router.post('/enviarSolicitud/',solicitudController.crearNuevaSolicitud);
 
@@ -37,7 +38,10 @@ module.exports= function(){
     router.post('/crearPersonal',personalController.nuevoPersonal );
     router.get('/crearUbicacionPersonal',ubicacionPersonalController.home );
     router.post('/enviarUbicacionPersonal',ubicacionPersonalController.crearNuevaUbicacion );
+    router.get('/getPersonal',personalController.getListaPersonal );
     router.get('/getUbicacionPersonal',ubicacionPersonalController.getListaSolicitud );
+    router.get('/asignarsolicitud/:usuarioId/:id',solicitudController.asignarSolicitud);
+    
 
     return router;
 }

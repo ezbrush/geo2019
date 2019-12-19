@@ -16,6 +16,7 @@ require('./models/solicitud');
 require('./models/especialidad');
 require('./models/personal');
 require('./models/ubicaPerso');
+require('./models/Asignacion');
 
 db.sync().then( ()=> console.log('DB Conectada')).catch((error)=>console.log(error));
 

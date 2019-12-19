@@ -1,13 +1,24 @@
 
 const Usuario = require('../models/usuario');
 const Solicitud = require('../models/solicitud');
-exports.formCrearSolicitud = async (req,res)=>{
-    const lista_usu= await Usuario.findAll();
+const Asignacion = require('../models/Asignacion');
 
+exports.formCrearSolicitud = async (req,res)=>{
+    const usuario = await Usuario.findOne({ where : {  id : req.params.usuarioId}});
+    const grupo = await Solicitud.findOne({ where : {  id : req.params.id, usuarioId: req.params.usuarioId}});
+    console.log(grupo.descripcion);
+    console.log('========');
+    console.log(usuario.nombre);
+    console.log('========');
+    const asigna={};
+    asigna.idpersonal=usuario.id;
+    asigna.idsolicitud=grupo.id
     res.render('crearSolicitud',{
-        lista_usu
-    });
+        usuario,grupo
+     });
 }
+
+
 exports.getListaSolicitud= async (req,res)=>{
     const lista_soli= await Solicitud.findAll();
     try {
@@ -18,8 +29,16 @@ exports.getListaSolicitud= async (req,res)=>{
 
 }
 
+exports.asignarSolicitud=async(req, res, next)=>{
+  
+    res.redirect('crearSolicitud');
+
+}
+
+
+
 exports.crearNuevaSolicitud= async (req,res)=>{
-    console.log('registrando solicitud desde el movil...');
+    console.log('registrando solicitud desde el api...');
     const solicitud = req.body;
 
     solicitud.usuarioId= req.body.id_user;
@@ -29,17 +48,26 @@ exports.crearNuevaSolicitud= async (req,res)=>{
        try {
        await Solicitud.create(solicitud);
        res.json({
-        ok: true,
+        ok: "true",
       });
        } catch (error) {
         res.json({
-            ok: false,
+            ok: "false",
             error: error
           });
        }
   
       
 }
+
+
+
+
+
+
+
+
+
 
 exports.crearSolicitud= async(req,res)=>{
     console.log('registrando solicitud...');
