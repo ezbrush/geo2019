@@ -1,15 +1,17 @@
 const Sequelize= require('sequelize');
 const db= require('../config/db');
 const bcrypt = require('bcrypt-nodejs');
+const especialidad = require('../models/especialidad');
 
-const usuario = db.define('usuario',{
+
+const personal=db.define('personal',{
     id:{
         type: Sequelize.INTEGER,
         primaryKey:true,
         autoIncrement:true,
     },
-    apellido:Sequelize.STRING(60),
     nombre:Sequelize.STRING(60),
+    apellido:Sequelize.STRING(60),
     email:{
         type: Sequelize.STRING(60),
         allowNull:false,
@@ -18,7 +20,7 @@ const usuario = db.define('usuario',{
         },
         unique:{
             args:true,
-            msg: 'usuario ya registrado'
+            msg: 'personal ya registrado'
         }
 
     },
@@ -33,36 +35,25 @@ const usuario = db.define('usuario',{
         },
 
     },
-    Telefono:Sequelize.INTEGER,
-    fecha : {
-        type : Sequelize.DATEONLY, 
-        allowNull : false,
-        validate : {
-            notEmpty : {
-                msg : 'Agrega una fecha'
-            }
-        }
-    },
-   
 
 },{
-    
     hooks: {
-    beforeCreate(usu) { 
-        usu.password = usuario.prototype.hashPassword(usu.password);
+        beforeCreate(pe) { 
+            pe.password = personal.prototype.hashPassword(pe.password);
         }
     }
+});
 
-}
-    
-
-);
 
 // Método para comparar los password
-usuario.prototype.validarPassword = function(password) {
+personal.prototype.validarPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 }
-usuario.prototype.hashPassword = function(password) {
+personal.prototype.hashPassword = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null );
 }
-module.exports = usuario;
+
+personal.belongsTo(especialidad, {foreignKey: 'idEsp'});
+
+
+module.exports = personal;

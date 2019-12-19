@@ -13,6 +13,8 @@ const db= require('./config/db');
 require('./models/operador');
 require('./models/usuario');
 require('./models/solicitud');
+require('./models/especialidad');
+
 db.sync().then( ()=> console.log('DB Conectada')).catch((error)=>console.log(error));
 
 const router= require('./routers');
