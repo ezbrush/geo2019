@@ -1,9 +1,8 @@
 
-const Especialidad = require('../models/especialidad');
+
 const Personal = require('../models/personal');
 exports.home =async (req,res)=>{
-    const lista= await Especialidad.findAll();
-    res.render('crearPersonal',{ lista});
+    res.render('crearPersonal');
 
 }
 

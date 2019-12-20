@@ -208,7 +208,6 @@
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Seccion Operativa</span></a></li>
         <li class=""><a href="/crearUsuario"><i class="fa fa-link"></i> <span>Registrar Usuario</span></a></li class="active">
         <li class=""><a href="/crearSolicitud"><i class="fa fa-link"></i> <span>Registrar Solicitud</span></a></li class="">
-        <li class=""><a href="/crearEspecialidad"><i class="fa fa-link"></i> <span>Registrar Especialidad</span></a></li ">
           <li class=""><a href="/crearPersonal"><i class="fa fa-link"></i> <span>Registrar Personal</span></a></li >
             <li class=""><a href="/crearUbicacionPersonal"><i class="fa fa-link"></i> <span>Registrar UbicacionPersonal</span></a></li >
       
@@ -314,7 +313,43 @@
     }).addTo(mymap);
 
   
-// Obtener mensajes del servidor
+
+
+
+
+    fetch('https://proysig.herokuapp.com/getUbicacionPersonal',{ 
+    method: 'GET'
+  })
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+   //   alert(JSON.stringify(myJson));
+    myJson.forEach( item => {
+        var greenIcon;
+  
+            greenIcon = new L.Icon({
+                iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              });
+  
+         
+          
+        mk= new L.marker([item.ubicacion.coordinates[0],item.ubicacion.coordinates[1]],{
+            icon: greenIcon,
+            draggable : true,
+            autoPan : true,
+        }).addTo(mymap).bindPopup("Personal "+item.idpersonal);
+    });
+  });
+
+
+    // Obtener mensajes del servidor
+
 
  fetch('https://proysig.herokuapp.com/getSolicitud',{ 
     method: 'GET'
@@ -362,20 +397,12 @@
             icon: greenIcon,
             draggable : true,
             autoPan : true,
-        }).addTo(mymap).bindPopup("Emergencia "+item.descripcion);
+        }).addTo(mymap).bindPopup("Emergencias "+item.descripcion);
     });
   });
 
 
 </script>
-
-            <!--
-
-
-            -->
-
-                
-            
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

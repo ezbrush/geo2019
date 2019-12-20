@@ -13,7 +13,7 @@ const db= require('./config/db');
 require('./models/operador');
 require('./models/usuario');
 require('./models/solicitud');
-require('./models/especialidad');
+//require('./models/especialidad');
 require('./models/personal');
 require('./models/ubicaPerso');
 require('./models/Asignacion');

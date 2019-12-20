@@ -207,7 +207,6 @@
         <li class=""><a href="/home"><i class="fa fa-link"></i> <span>Seccion Operativa</span></a></li>
         <li class=""><a href="/crearUsuario"><i class="fa fa-link"></i> <span>Registrar Usuario</span></a></li class="active">
           <li class=""><a href="/crearSolicitud"><i class="fa fa-link"></i> <span>Registrar Solicitud</span></a></li class="">      
-            <li class=""><a href="/crearEspecialidad"><i class="fa fa-link"></i> <span>Registrar Especialidad</span></a></li class="">
                 <li class="active"><a href="/crearPersonal"><i class="fa fa-link"></i> <span>Registrar Personal</span></a></li >
                     <li class=""><a href="/crearUbicacionPersonal"><i class="fa fa-link"></i> <span>Registrar UbicacionPersonal</span></a></li >
       </ul>
@@ -257,18 +256,7 @@
             <!-- form start -->
             <form action="/crearPersonal" method="POST">
               <div class="box-body">
-                <div class="form-group">
-                  <label for="example">EspecialidadID: </label>
-                  <select class="form-control" name="idEsp" >
-                    <option value="" selected disabled>---Selecciona la Especialidad---</option>
-                    <% if ( lista.length > 0){%>
-                    <% lista.forEach(usu =>{ %>
-                      <option value="<%= usu.id %> "> <%= usu.nombre %></option>
-
-                    <% }) %>
-                    <% }%>
-                    </select>
-                </div>
+                
                 <div class="form-group">
                   <label for="exampleInputEmail1">Apellido</label>
                   <input type="text" class="form-control" id="exampleInputApellido" placeholder="Ingesar su Apellido" name="apellido">
@@ -276,6 +264,10 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nombre</label>
                   <input type="text" class="form-control" id="exampleInputnombre" placeholder="Ingesar su nombre" name="nombre">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Profesion</label>
+                  <input type="text" class="form-control" id="exampleInputprofesion" placeholder="Ingesar profesion" name="profesion">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Telefono</label>
@@ -287,7 +279,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                  <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" name="password">
                 </div>
              
                 <!-- /.form group -->

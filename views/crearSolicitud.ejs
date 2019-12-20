@@ -213,7 +213,6 @@
         <li class=""><a href="/home"><i class="fa fa-link"></i> <span>Seccion Operativa</span></a></li>
         <li class=""><a href="/crearUsuario"><i class="fa fa-link"></i> <span>Registrar Usuario</span></a></li class="">
         <li class="active"><a href="/crearSolicitud"><i class="fa fa-link"></i> <span>Registrar Solicitud</span></a></li class="active">
-          <li class=""><a href="/crearEspecialidad"><i class="fa fa-link"></i> <span>Registrar Especialidad</span></a></li class="">
             <li class=""><a href="/crearPersonal"><i class="fa fa-link"></i> <span>Registrar Personal</span></a></li >
               <li class=""><a href="/crearUbicacionPersonal"><i class="fa fa-link"></i> <span>Registrar UbicacionPersonal</span></a></li >
       
@@ -271,13 +270,14 @@
                 </div >
                 <div class="form-group">
                   <label  for="exampleInputEmail1">Tipo de Solicitud</label>
-                  <input class="form-control" type="text" id="solicitud" value="<%= grupo.descripcion %>" disabled>
+                  <input class="form-control" type="text" id="solicitud" value="<%= solicitud.descripcion %>" disabled>
                   </div >
               
               <!--Mapa de ubucacion-->
-            <input type="hidden" id="lat" value="<%= grupo.ubicacion.coordinates[0] %>">
-            <input type="hidden" id="lng" value="<%= grupo.ubicacion.coordinates[1] %>">
-            <input type="hidden" id="descripcion" value="<%= grupo.descripcion %>">
+            <input type="hidden" id="lat" value="<%= solicitud.ubicacion.coordinates[0] %>">
+            <input type="hidden" id="lng" value="<%= solicitud.ubicacion.coordinates[1] %>">
+            <input type="hidden" id="descripcion" value="<%= solicitud.descripcion %>">
+            <input type="hidden" id="soli" value="<%= solicitud.id %>">
            
             <div class="campo mapa">
               <div id="mapa"></div>

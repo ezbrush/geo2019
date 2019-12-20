@@ -18,15 +18,15 @@ exports.getListaSolicitud= async (req,res)=>{
 }
 
 
-exports.crearNuevaUbicacion= async (req,res)=>{
-    console.log('registrando Ubicacion desde el movil...');
+exports.crearNuevaUbicacionPersonal= async (req,res)=>{
+    console.log('registrando Ubicacion del personal desde la api...');
     const solicitud = req.body;
-
-    solicitud.idpersonal= req.body.id_personal;
+ //   console.log(solicitud);
     const point = { type: 'Point',coordinates: [parseFloat(req.body.lat),parseFloat(req.body.lng)]};
     solicitud.ubicacion= point;
+
        try {
-       await Ubica.create(solicitud);
+        await Ubica.create(solicitud);
        res.json({
         ok: true,
       });

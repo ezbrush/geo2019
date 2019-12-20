@@ -2,19 +2,57 @@
 const Usuario = require('../models/usuario');
 const Solicitud = require('../models/solicitud');
 const Asignacion = require('../models/Asignacion');
+const UbicaPerso = require('../models/ubicaPerso');
+
+const Perso = require('../models/personal');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
+
+exports.getCercanos = async (req,res)=>{
+    const lat= req.body.lat;
+    const lng= req.body.lng;
+    //console.log(lat);
+    //console.log(lng);
+    // Consultar por meeti's cercanos
+    const ubicacion = Sequelize.literal(`ST_GeomFromText( 'POINT( ${lat} ${lng} )' )`);
+    console.log(ubicacion);
+    // ST_DISTANCE_Sphere = Retorna una linea en metros
+    const distancia = Sequelize.fn('ST_Distance_Sphere', Sequelize.col('ubicacion'), ubicacion);
+    console.log(distancia);
+    // encontrar meeti's cercanos
+    const cercanos = await UbicaPerso.findAll({
+        order: distancia, // los ordena del mas cercano al lejano
+        where : Sequelize.where(distancia, { [Op.lte] : 2000 } ), // 2 mil metros o 2km
+        limit: 3, // maximo 3
+        //offset: 1, 
+        include: 
+        [{model :  Perso,
+            attributes: ['id','nombre','apellido','profesion'] },
+        ]
+        
+        
+    }) ;
+    console.log(cercanos)
+    try {
+        res.json(cercanos)
+    } catch (error) {
+        res.json(error)
+    }
+}
 
 exports.formCrearSolicitud = async (req,res)=>{
     const usuario = await Usuario.findOne({ where : {  id : req.params.usuarioId}});
-    const grupo = await Solicitud.findOne({ where : {  id : req.params.id, usuarioId: req.params.usuarioId}});
-    console.log(grupo.descripcion);
-    console.log('========');
-    console.log(usuario.nombre);
-    console.log('========');
+    const solicitud = await Solicitud.findOne({ where : {  id : req.params.id, usuarioId: req.params.usuarioId}});
+    
     const asigna={};
     asigna.idpersonal=usuario.id;
-    asigna.idsolicitud=grupo.id
+    asigna.idsolicitud=solicitud.id
+
+
+
     res.render('crearSolicitud',{
-        usuario,grupo
+        usuario,solicitud
      });
 }
 
@@ -90,3 +128,4 @@ exports.crearSolicitud= async(req,res)=>{
         }
       
 }
+
