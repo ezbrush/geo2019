@@ -14,13 +14,11 @@ exports.getCercanos = async (req,res)=>{
     const lng= req.body.lng;
     //console.log(lat);
     //console.log(lng);
-    // Consultar por meeti's cercanos
     const ubicacion = Sequelize.literal(`ST_GeomFromText( 'POINT( ${lat} ${lng} )' )`);
     console.log(ubicacion);
     // ST_DISTANCE_Sphere = Retorna una linea en metros
     const distancia = Sequelize.fn('ST_Distance_Sphere', Sequelize.col('ubicacion'), ubicacion);
     console.log(distancia);
-    // encontrar meeti's cercanos
     const cercanos = await UbicaPerso.findAll({
         order: distancia, // los ordena del mas cercano al lejano
         where : Sequelize.where(distancia, { [Op.lte] : 2000 } ), // 2 mil metros o 2km
@@ -30,8 +28,6 @@ exports.getCercanos = async (req,res)=>{
         [{model :  Perso,
             attributes: ['id','nombre','apellido','profesion'] },
         ]
-        
-        
     }) ;
     console.log(cercanos)
     try {

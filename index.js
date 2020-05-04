@@ -6,14 +6,10 @@ const flash= require('connect-flash');
 const session= require('express-session');
 const cookieParser= require('cookie-parser');
 const passport = require('./config/passport');
-
-
-//Configuracion y modelos de DB
 const db= require('./config/db');
 require('./models/operador');
 require('./models/usuario');
 require('./models/solicitud');
-//require('./models/especialidad');
 require('./models/personal');
 require('./models/ubicaPerso');
 require('./models/Asignacion');
@@ -23,12 +19,7 @@ db.sync().then( ()=> console.log('DB Conectada')).catch((error)=>console.log(err
 const router= require('./routers');
 require('dotenv').config({path: 'variables.env'});
 
-//Aplicacion principal
 const app = express();
-
-
-
-
 const publicPath = path.resolve(__dirname, './public');
 app.set('views', path.join(__dirname, './public'));
 app.set('views', path.join(__dirname, './public/views'));
@@ -47,8 +38,6 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
-
 
 
 //Habilitar EJS como template engine
